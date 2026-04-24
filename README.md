@@ -1,9 +1,7 @@
+
+
+
 # F.O.R.G.E
-Here’s a **complete, structured `README.md`** for your F.O.R.G.E project. It’s written the way real-world engineering teams present architecture, planning, and execution.
-
----
-
-# 🌲 F.O.R.G.E
 
 ### Forest Observation & Regulation Governance Engine
 
