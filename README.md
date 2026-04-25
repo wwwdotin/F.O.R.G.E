@@ -307,17 +307,191 @@ Outputs:
 
 ```
 forge/
-├── frontend/         # React UI
-├── backend/          # FastAPI server
-├── ml/               # ML models
-├── data_pipeline/    # Satellite processing
-├── integration/      # Workflow orchestration
-├── storage/          # Images & logs
-├── configs/          # Config files
-├── scripts/          # Run scripts
-├── docker/           # Containerization
-├── docs/             # Documentation
-```
+│
+├── frontend/                         # Member 1 (React)
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Map/
+│   │   │   ├── Alerts/
+│   │   │   ├── PermitForms/
+│   │   │   ├── ImageCompare/
+│   │   │   └── Layout/
+│   │   │
+│   │   ├── pages/
+│   │   │   ├── Dashboard.jsx
+│   │   │   ├── PermitPage.jsx
+│   │   │   ├── AlertsPage.jsx
+│   │   │   ├── ContractorPage.jsx
+│   │   │   └── Login.jsx
+│   │   │
+│   │   ├── services/                 # API calls
+│   │   │   ├── api.js
+│   │   │   ├── permitService.js
+│   │   │   ├── alertService.js
+│   │   │   ├── evidenceService.js
+│   │   │   └── authService.js
+│   │   │
+│   │   ├── hooks/
+│   │   ├── utils/
+│   │   ├── assets/
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   │
+│   ├── package.json
+│   └── .env
+│
+├── backend/                          # Member 2
+│   ├── app/
+│   │   ├── main.py                   # FastAPI entry
+│   │
+│   │   ├── api/                      # Route layer
+│   │   │   ├── routes/
+│   │   │   │   ├── auth.py
+│   │   │   │   ├── permit.py
+│   │   │   │   ├── alerts.py
+│   │   │   │   ├── evidence.py
+│   │   │   │   ├── logs.py
+│   │   │   │   ├── risk.py
+│   │   │   │   └── anomaly.py
+│   │
+│   │   ├── services/                 # Business logic
+│   │   │   ├── permit_service.py
+│   │   │   ├── alert_service.py
+│   │   │   ├── compliance_service.py
+│   │   │   ├── evidence_service.py
+│   │   │   ├── log_service.py
+│   │   │   └── risk_service.py
+│   │
+│   │   ├── models/                   # ORM models
+│   │   │   ├── user.py
+│   │   │   ├── permit.py
+│   │   │   ├── route.py
+│   │   │   ├── alert.py
+│   │   │   ├── log.py
+│   │   │   └── evidence.py
+│   │
+│   │   ├── schemas/                  # Pydantic schemas
+│   │   │   ├── user_schema.py
+│   │   │   ├── permit_schema.py
+│   │   │   ├── alert_schema.py
+│   │   │   ├── log_schema.py
+│   │   │   └── risk_schema.py
+│   │
+│   │   ├── database/
+│   │   │   ├── connection.py
+│   │   │   ├── init_db.py
+│   │   │   └── migrations/
+│   │
+│   │   ├── utils/
+│   │   │   ├── geo_utils.py
+│   │   │   ├── file_utils.py
+│   │   │   └── auth_utils.py
+│   │
+│   │   └── config.py
+│   │
+│   ├── requirements.txt
+│   └── .env
+│
+├── ml/                               # Member 3B
+│   ├── segmentation/
+│   │   ├── unet.py
+│   │   ├── deeplab.py
+│   │   └── train_segmentation.py
+│   │
+│   ├── change_detection/
+│   │   ├── temporal_cnn.py
+│   │   ├── convlstm.py
+│   │   └── train_change.py
+│   │
+│   ├── risk_model/
+│   │   ├── xgboost_model.py
+│   │   ├── random_forest.py
+│   │   └── train_risk.py
+│   │
+│   ├── inference/
+│   │   ├── run_inference.py
+│   │   └── output_formatter.py
+│   │
+│   ├── models/                       # Saved weights
+│   └── utils/
+│
+├── data_pipeline/                    # Member 3A
+│   ├── gee/
+│   │   ├── fetch_sentinel1.py
+│   │   ├── fetch_sentinel2.py
+│   │   └── export_tiles.py
+│   │
+│   ├── preprocessing/
+│   │   ├── normalize.py
+│   │   ├── tiling.py
+│   │   ├── temporal_stack.py
+│   │   └── create_pairs.py           # before/after images
+│   │
+│   ├── datasets/
+│   │   ├── raw/
+│   │   ├── processed/
+│   │   └── labels/
+│   │
+│   └── pipeline_runner.py
+│
+├── integration/                      # Member 4
+│   ├── orchestrator/
+│   │   ├── workflow_manager.py       # main pipeline
+│   │   ├── trigger_engine.py         # when to run ML
+│   │
+│   ├── alert_engine/
+│   │   ├── alert_rules.py
+│   │   ├── notifier.py               # email/Twilio
+│   │
+│   ├── validation/
+│   │   ├── boundary_check.py
+│   │   ├── time_check.py
+│   │   └── threshold_check.py
+│   │
+│   ├── connectors/
+│   │   ├── ml_connector.py
+│   │   ├── backend_connector.py
+│   │   └── storage_connector.py
+│   │
+│   └── tests/
+│       ├── test_workflow.py
+│       └── test_alerts.py
+│
+├── storage/
+│   ├── satellite_images/
+│   │   ├── before/
+│   │   └── after/
+│   │
+│   ├── contractor_uploads/
+│   └── logs/
+│
+├── configs/
+│   ├── environment.yaml
+│   ├── constants.py
+│   └── model_config.yaml
+│
+├── scripts/
+│   ├── setup.sh
+│   ├── run_backend.sh
+│   ├── run_frontend.sh
+│   └── run_pipeline.sh
+│
+├── docker/
+│   ├── backend.Dockerfile
+│   ├── frontend.Dockerfile
+│   ├── ml.Dockerfile
+│   └── docker-compose.yml
+│
+├── docs/
+│   ├── architecture.md
+│   ├── api_docs.md
+│   ├── workflow.md
+│   └── setup_guide.md
+│
+├── .env
+├── README.md
+└── requirements.txt
 
 ---
 
